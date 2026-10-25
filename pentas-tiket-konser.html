@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pentas — Tiket Konser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pentas-tiket-konser.css">
+</head>
+<body>
+
+<div id="cursor-glow" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">Pentas<i>.</i></a>
+    <nav>
+      <a href="#jadwal">Jadwal</a>
+      <button class="cart-btn" id="openCart" aria-label="Buka pesanan">Pesanan <b id="cartCount">0</b></button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Musim konser 2026 — 2027</div>
+    <h1>Kursi terbaik <em>untuk</em> malam yang ditunggu.</h1>
+    <p>Pilih konser, bandingkan kategori tiket, lalu pesan. Tiket resmi untuk konser internasional dan nasional, semuanya dalam satu tempat.</p>
+  </div>
+</section>
+
+<main class="wrap" id="jadwal">
+  <div class="controls">
+    <div class="search">
+      <input id="q" type="search" placeholder="Cari artis, kota, atau genre" autocomplete="off" aria-label="Cari konser">
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="sortKey">Urutkan</label>
+        <div class="sortline">
+          <select id="sortKey">
+            <option value="date">Tanggal</option>
+            <option value="price">Harga termurah</option>
+            <option value="name">Nama artis</option>
+            <option value="sold">Peminat</option>
+          </select>
+          <button class="dirbtn" id="dir" title="Balik urutan" aria-label="Balik urutan">↑</button>
+        </div>
+      </div>
+      <div class="price">
+        <span class="label">Rentang harga mulai dari</span>
+        <div class="ranges">
+          <input type="range" id="pmin" min="0" max="12000000" step="100000" value="0" aria-label="Harga minimum">
+          <input type="range" id="pmax" min="0" max="12000000" step="100000" value="12000000" aria-label="Harga maksimum">
+        </div>
+        <div class="vals"><span id="vmin"></span><span id="vmax"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <span class="label">Genre</span>
+      <div class="chips" id="chips"></div>
+    </div>
+  </div>
+
+  <div class="resultbar"><span id="count"></span></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Pentas — contoh proyek tiket konser. Jadwal, harga, dan stok adalah data ilustrasi, bukan penjualan sungguhan.</span>
+    <span>HTML · CSS · JavaScript, tanpa library.</span>
+  <details class="photo-credits">
+    <summary>Kredit foto artis dan band</summary>
+    <ul>
+      <li class="gif-credit"><strong>GIF konser saat kursor di tiket</strong> — cuplikan animasi dari <a href="https://giphy.com" target="_blank" rel="noopener noreferrer">GIPHY</a>: Coldplay oleh Global Citizen; Taylor Swift oleh Disney+; BLACKPINK oleh Coachella; Ed Sheeran oleh BBC Radio 1; Bruno Mars oleh iHeartRadio; Raisa oleh kanal resmi Raisa; The Weeknd oleh Recording Academy / GRAMMYs; Jason Mraz oleh kanal resmi Jason Mraz; Martin Garrix oleh kanal resmi Martin Garrix.</li>
+      <li><strong>Coldplay</strong> — “Coldplay”, Roger Woolman. <a href="https://commons.wikimedia.org/wiki/File:Coldplay_(55208440).jpeg" target="_blank" rel="noopener noreferrer">Sumber foto</a> · <a href="https://creativecommons.org/licenses/by/3.0" target="_blank" rel="noopener noreferrer">CC BY 3.0</a>.</li>
+      <li><strong>Taylor Swift</strong> — “Taylor Swift - Haunted - Speak Now WORLD Tour in Pittsburgh”, Ronald Woan. <a href="https://commons.wikimedia.org/wiki/File:Taylor_Swift_-_Haunted_-_Speak_Now_WORLD_Tour_in_Pittsburgh.jpg" target="_blank" rel="noopener noreferrer">Sumber foto</a> · <a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener noreferrer">CC BY-SA 2.0</a>.</li>
+      <li><strong>BLACKPINK</strong> — “20190518 Blackpink Amsterdam concert 22 (cropped)”, Robbie Klinkenberg. <a href="https://commons.wikimedia.org/wiki/File:20190518_Blackpink_Amsterdam_concert_22_(cropped).jpg" target="_blank" rel="noopener noreferrer">Sumber foto</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.</li>
+      <li><strong>Ed Sheeran</strong> — “Ed Sheeran (8507731877)”, Eva Rinaldi from Sydney, Australia. <a href="https://commons.wikimedia.org/wiki/File:Ed_Sheeran_(8507731877).jpg" target="_blank" rel="noopener noreferrer">Sumber foto</a> · <a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener noreferrer">CC BY-SA 2.0</a>.</li>
+      <li><strong>Bruno Mars</strong> — “Bruno Mars Concert Houston 2”, Brothers Le. <a href="https://commons.wikimedia.org/wiki/File:Bruno_Mars_Concert_Houston_2.jpg" target="_blank" rel="noopener noreferrer">Sumber foto</a> · <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener noreferrer">CC BY 2.0</a>.</li>
+      <li><strong>Dewa 19</strong> — “Dewa 19 montage”, Collage created by Bluesatellite. <a href="https://commons.wikimedia.org/wiki/File:Dewa_19_montage.jpg" target="_blank" rel="noopener noreferrer">Sumber foto</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>.</li>
+      <li><strong>Tulus</strong> — “Tulus on Manusia Tour 2023”, Narasi Newsroom. <a href="https://commons.wikimedia.org/wiki/File:Tulus_on_Manusia_Tour_2023.jpg" target="_blank" rel="noopener noreferrer">Sumber foto</a> · <a href="https://creativecommons.org/licenses/by/3.0" target="_blank" rel="noopener noreferrer">CC BY 3.0</a>.</li>
+      <li><strong>Raisa</strong> — “Raisa at Dental Project 2015 - 2”, Mas Agung Wilis Yudha Baskoro. <a href="https://commons.wikimedia.org/wiki/File:Raisa_at_Dental_Project_2015_-_2.jpg" target="_blank" rel="noopener noreferrer">Sumber foto</a> · <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener noreferrer">CC BY 2.0</a>.</li>
+      <li><strong>Sheila on 7</strong> — “Sheila on 7”, Mas Agung Wilis Yudha Baskoro Collage by AnsyahF. <a href="https://commons.wikimedia.org/wiki/File:Sheila_on_7.jpg" target="_blank" rel="noopener noreferrer">Sumber foto</a> · <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener noreferrer">CC BY 2.0</a>.</li>
+      <li><strong>The Weeknd</strong> — “The Weeknd performing live in Hong Kong in November 2018”, Salandco. <a href="https://commons.wikimedia.org/wiki/File:The_Weeknd_performing_live_in_Hong_Kong_in_November_2018.jpg" target="_blank" rel="noopener noreferrer">Sumber foto</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.</li>
+      <li><strong>Jason Mraz</strong> — “Jason Mraz-3”, digboston. <a href="https://commons.wikimedia.org/wiki/File:Jason_Mraz-3.jpg" target="_blank" rel="noopener noreferrer">Sumber foto</a> · <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener noreferrer">CC BY 2.0</a>.</li>
+      <li><strong>Westlife</strong> — “Westlife 2011”, Khánh Hmoong from Nha Trang, Vietnam. <a href="https://commons.wikimedia.org/wiki/File:Westlife_2011.jpg" target="_blank" rel="noopener noreferrer">Sumber foto</a> · <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener noreferrer">CC BY 2.0</a>.</li>
+      <li><strong>Hindia</strong> — “Daniel Baskara Putra (Hindia)”, David Wadie Fisher-Freberg. <a href="https://commons.wikimedia.org/wiki/File:Daniel_Baskara_Putra_(Hindia).jpg" target="_blank" rel="noopener noreferrer">Sumber foto</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.</li>
+      <li><strong>Martin Garrix</strong> — “Martin Garrix Americas Tour New York Show”, louis van baar. <a href="https://commons.wikimedia.org/wiki/File:Martin_Garrix_Americas_Tour_New_York_Show.jpg" target="_blank" rel="noopener noreferrer">Sumber foto</a> · <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.en" target="_blank" rel="noopener noreferrer">CC0</a>.</li>
+    </ul>
+  </details>
+  </div>
+</footer>
+
+<dialog id="detail"></dialog>
+<dialog id="cartDlg"></dialog>
+
+<script src="pentas-tiket-konser.js" defer></script>
+</body>
+</html>
