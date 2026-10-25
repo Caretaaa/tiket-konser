@@ -159,9 +159,10 @@ const ARTIST_GIF = {
 };
 let gifWarmup = null;
 const warmGifs = () => { if (!gifWarmup && Object.keys(ARTIST_GIF).length){ gifWarmup = true;
-  const warm = () => Object.values(ARTIST_GIF).forEach(src => { const im = new Image(); im.decoding="async"; im.src = src; });
-  "requestIdleCallback" in window ? requestIdleCallback(warm, {timeout:4000}) : setTimeout(warm, 2500); } };
-warmGifs(); // langsung ambil gambar gif sebagai warm-up; gif akan di-"swap" saat kursor di tiket
+  // muat semua gif segera dengan prioritas rendah agar hover tidak menunggu unduhan
+  Object.values(ARTIST_GIF).forEach(src => { const im = new Image(); im.decoding = "async"; im.src = src; });
+} };
+warmGifs();
 
 function ticketHTML(e){
   const d = dt(e.date), out = e.sold >= 100, low = e.sold >= 85 && !out;
@@ -294,9 +295,20 @@ if (!reduceMotion.matches) {
     if (card) setGif(card, true);
   });
 
-  grid.addEventListener("pointerleave", e => {
+  // pointerout menggelembung dari kartu: reset saat kursor benar-benar keluar kartu
+  grid.addEventListener("pointerout", e => {
+    if (e.pointerType === "touch") return;
     const card = e.target.closest(".ticket");
-    if (card) setGif(card, false);
+    if (!card || (e.relatedTarget && card.contains(e.relatedTarget))) return;
+    setGif(card, false);
+  });
+
+  // kalau gif gagal dimuat, kembali ke foto statis dan jangan coba lagi
+  grid.addEventListener("error", e => {
+    const t = e.target, img = t && t.closest ? t.closest(".artist-photo") : null;
+    if (!img || !img.dataset.gif) return;
+    img.src = img.dataset.still;
+    delete img.dataset.gif;
   }, true);
 }
 
