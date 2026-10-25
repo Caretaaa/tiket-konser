@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3efe6">
+  <meta name="description" content="Karcis — cari perjalanan dan penginapan, sekaligus ruang belajar struktur data." >
+  <title>Karcis — perjalanan & penginapan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="js/data.js"></script>
+  <script defer src="js/array.js"></script>
+  <script defer src="js/pointer.js"></script>
+  <script defer src="js/sort.js"></script>
+  <script defer src="js/search.js"></script>
+  <script defer src="js/ui.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#ticket-list">Langsung ke daftar layanan</a>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Karcis, beranda"><span class="brand-mark" aria-hidden="true">K</span><span>karcis<span class="brand-period">.</span></span></a>
+    <div class="topbar-note"><span class="live-dot" aria-hidden="true"></span><span>Meja perjalanan <b>dibuka</b></span></div>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Aktifkan mode gelap"><span class="theme-icon" aria-hidden="true">◐</span><span class="theme-label" id="theme-label">Mode tinta</span></button>
+  </header>
+
+  <main id="top">
+    <section class="masthead" aria-labelledby="page-title">
+      <div class="masthead-copy">
+        <p class="eyebrow"><span>CATATAN PERJALANAN</span><span class="eyebrow-rule"></span><span>VOL. 026</span></p>
+        <h1 id="page-title">Jalan punya<br><em>tujuan.</em></h1>
+      </div>
+      <div class="masthead-aside">
+        <p>Pilih rute atau tempat singgah. Bandingkan harga, tanggal, dan ketersediaan sebelum berangkat.</p>
+        <div class="masthead-stats"><span><strong id="event-count">20</strong><small>LAYANAN</small></span><span><strong>2026</strong><small>RENCANA JALAN</small></span></div>
+      </div>
+    </section>
+
+    <nav class="mobile-tabs" aria-label="Pilih area kerja" role="tablist">
+      <button type="button" role="tab" id="tab-events" aria-selected="true" aria-controls="events-column">Perjalanan & hotel</button>
+      <button type="button" role="tab" id="tab-lab" aria-selected="false" aria-controls="lab-column">Meja algoritma</button>
+    </nav>
+
+    <div class="workspace">
+      <section class="events-column mobile-active" id="events-column" aria-labelledby="events-heading">
+        <div class="section-head">
+          <div><p class="section-kicker">01 / PILIH TUJUAN</p><h2 id="events-heading">Cari perjalanan</h2></div>
+          <span class="index-stamp">K—26</span>
+        </div>
+
+        <div class="filters" role="search">
+          <label class="search-box"><span class="sr-only">Cari rute, hotel, atau penyedia</span><span class="search-symbol" aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Rute, hotel, atau penyedia" autocomplete="off"><kbd>/</kbd></label>
+          <label class="select-wrap"><span class="sr-only">Filter kota tujuan</span><select id="city-filter"><option value="">Semua kota</option></select></label>
+          <label class="select-wrap"><span class="sr-only">Filter jenis layanan</span><select id="category-filter"><option value="">Semua layanan</option><option>Kereta</option><option>Pesawat</option><option>Bus</option><option>Hotel</option></select></label>
+        </div>
+
+        <div class="list-meta"><span id="visible-count">20 layanan</span><span class="meta-right"><span class="legend-dot"></span> kursi atau kamar tersedia</span></div>
+        <div class="ticket-list" id="ticket-list" aria-live="polite"></div>
+
+        <section class="detail-panel" id="detail-panel" aria-live="polite" aria-label="Detail layanan">
+          <div class="detail-placeholder"><span class="detail-number">LAYANAN — —</span><p>Pilih perjalanan atau hotel untuk melihat rinciannya.</p></div>
+        </section>
+      </section>
+
+      <aside class="lab-column" id="lab-column" aria-labelledby="lab-heading">
+        <div class="section-head lab-title-row">
+          <div><p class="section-kicker">02 / DI BALIK LAYAR</p><h2 id="lab-heading">Meja algoritma</h2></div>
+          <span class="lab-led" title="Visualizer aktif"><i></i> AKTIF</span>
+        </div>
+
+        <section class="lab-block sort-block" aria-labelledby="sort-heading">
+          <div class="block-heading"><span class="block-index">A.</span><h3 id="sort-heading">Urutkan array</h3><span class="block-note">LANGKAH DEMI LANGKAH</span></div>
+          <div class="sort-controls">
+            <label><span>Algoritma</span><select id="sort-algorithm"><option value="bubble">Bubble sort</option><option value="selection">Selection sort</option><option value="insertion">Insertion sort</option></select></label>
+            <label><span>Urutkan menurut</span><select id="sort-field"><option value="price">Harga</option><option value="date">Tanggal</option><option value="name">Nama layanan</option><option value="provider">Penyedia</option><option value="id">ID</option></select></label>
+            <label><span>Arah</span><select id="sort-direction"><option value="asc">Naik ↑</option><option value="desc">Turun ↓</option></select></label>
+          </div>
+          <div class="sort-toolbar">
+            <div class="transport" aria-label="Kontrol visualisasi sorting">
+              <button class="transport-play" id="play-sort" type="button" title="Putar" aria-label="Putar sorting">▶</button>
+              <button id="pause-sort" type="button" title="Jeda" aria-label="Jeda sorting">Ⅱ</button>
+              <button id="step-sort" type="button" title="Satu langkah" aria-label="Jalankan satu langkah sorting">→|</button>
+              <button id="reset-sort" type="button" title="Reset" aria-label="Reset sorting">↺</button>
+            </div>
+            <label class="speed-control"><span>KECEPATAN</span><input id="sort-speed" type="range" min="80" max="900" value="420" step="20"><output id="speed-value">420 ms</output></label>
+          </div>
+          <div class="sort-stats" aria-live="polite">
+            <div><small>PERBANDINGAN</small><strong id="compare-count">0</strong></div>
+            <div><small>PERTUKARAN</small><strong id="swap-count">0</strong></div>
+            <div class="complexity-stat"><small>KOMPLEKSITAS</small><strong id="complexity">O(n²)</strong></div>
+          </div>
+          <p class="algorithm-status" id="algorithm-status" aria-live="polite">Pilih algoritma, lalu tekan putar atau satu langkah.</p>
+        </section>
+
+        <section class="lab-block array-block" aria-labelledby="array-heading">
+          <div class="block-heading"><span class="block-index">B.</span><h3 id="array-heading">Memori array</h3><span class="block-note" id="array-length">20 ELEMEN</span></div>
+          <p class="array-caption">Setiap sel menyimpan satu layanan perjalanan atau hotel. Pointer ditampilkan saat algoritma berjalan.</p>
+          <div class="array-scroller" id="array-memory" role="list" aria-label="Sel array layanan"></div>
+          <div class="pointer-legend" id="pointer-legend" aria-live="polite"><span class="pointer-chip chip-i">i</span> indeks <span class="pointer-chip chip-j">j</span> banding <span class="pointer-chip chip-mid">mid</span> tengah</div>
+        </section>
+
+        <section class="lab-block search-block" aria-labelledby="search-heading">
+          <div class="block-heading"><span class="block-index">C.</span><h3 id="search-heading">Temukan layanan</h3><span class="block-note">SEARCH</span></div>
+          <div class="search-controls">
+            <label><span>Metode</span><select id="search-mode"><option value="linear">Linear search</option><option value="binary">Binary search</option></select></label>
+            <label id="binary-field-wrap" class="hidden"><span>Cari berdasarkan</span><select id="binary-field"><option value="id">ID booking</option><option value="price">Harga</option></select></label>
+            <button class="button-ink" id="run-search" type="button">Cari →</button>
+          </div>
+          <p class="search-hint" id="search-hint">Linear search memeriksa nama layanan dan penyedia dari kiri ke kanan.</p>
+          <div class="search-log" id="search-log" aria-live="polite"><span class="log-placeholder">Langkah pencarian muncul di sini.</span></div>
+        </section>
+
+        <section class="lab-block queue-block" aria-labelledby="queue-heading">
+          <div class="block-heading"><span class="block-index">D.</span><h3 id="queue-heading">Antrian pemesan</h3><span class="block-note">LINKED LIST</span></div>
+          <div class="queue-pointers"><span><b>head</b><i id="queue-head">null</i></span><span><b>tail</b><i id="queue-tail">null</i></span><span><b>panjang</b><i id="queue-length">0</i></span></div>
+          <div class="queue-track" id="queue-track" aria-live="polite"><span class="queue-empty">Belum ada pemesan.</span></div>
+          <div class="queue-footer"><p>Setiap node punya <code>data</code> dan referensi <code>next</code>.</p><button class="button-text" id="dequeue-button" type="button" disabled>Layani head ↗</button></div>
+        </section>
+
+        <details class="data-tools">
+          <summary><span>Kelola data array</span><span class="summary-mark">＋</span></summary>
+          <div class="data-tools-body">
+            <p>Tambah layanan memakai <code>push()</code> ke akhir array. Hapus menggeser elemen secara manual.</p>
+            <form class="remove-form" id="remove-form"><label for="remove-index">Hapus sel indeks</label><input id="remove-index" type="number" min="0" placeholder="0" required><button type="submit" class="button-outline">Hapus</button></form>
+            <button type="button" class="button-outline add-event-button" id="add-event">＋ Tambah layanan</button>
+            <p class="data-feedback" id="data-feedback" aria-live="polite"></p>
+          </div>
+        </details>
+        <p class="lab-footnote"><span aria-hidden="true">/</span> ARRAY LAYANAN / RUANG LATIHAN STRUKTUR DATA</p>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer"><a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">K</span><span>karcis<span class="brand-period">.</span></span></a><span>Untuk perjalanan berikutnya.</span><span class="footer-serial">ARSIP / 026—ID</span></footer>
+
+  <dialog id="buyer-dialog" class="form-dialog">
+    <form method="dialog" class="dialog-close-row"><button class="dialog-close" aria-label="Tutup">×</button></form>
+    <p class="section-kicker">DETAIL PEMESANAN</p><h2>Untuk siapa?</h2>
+    <form id="buyer-form" class="dialog-form"><input type="hidden" id="buyer-ticket-id"><label>Nama pemesan<input id="buyer-name" name="buyerName" required maxlength="60" placeholder="Nama lengkap"></label><label>Email<input id="buyer-email" name="email" required type="email" placeholder="nama@email.com"></label><p class="dialog-ticket-summary" id="buyer-ticket-summary"></p><div class="dialog-actions"><button class="button-outline" type="button" data-close="buyer-dialog">Kembali</button><button class="button-ink" type="submit">Konfirmasi booking →</button></div></form>
+  </dialog>
+
+  <dialog id="event-dialog" class="form-dialog event-dialog">
+    <form method="dialog" class="dialog-close-row"><button class="dialog-close" aria-label="Tutup">×</button></form>
+    <p class="section-kicker" id="event-dialog-kicker">DATA LAYANAN</p><h2 id="event-dialog-title">Tambah layanan</h2>
+    <form id="event-form" class="dialog-form event-form">
+      <input id="event-id" type="hidden">
+      <label class="field-wide">Nama rute atau hotel<input id="event-name" required maxlength="70" placeholder="Jakarta — Yogyakarta / Hotel Sanur"></label>
+      <label>Penyedia atau tipe kamar<input id="event-artist" required maxlength="70" placeholder="Nama operator / Deluxe · 2 malam"></label>
+      <label>Kota tujuan<input id="event-city" required maxlength="50" placeholder="Kota"></label>
+      <label>Tanggal berangkat / check-in<input id="event-date" type="date" min="2026-01-01" max="2026-12-31" required></label>
+      <label>Jenis layanan<select id="event-category"><option>Kereta</option><option>Pesawat</option><option>Bus</option><option>Hotel</option></select></label>
+      <label>Harga (Rp)<input id="event-price" type="number" min="10000" step="1000" required placeholder="250000"></label>
+      <label>Kursi / kamar tersedia<input id="event-quota" type="number" min="0" step="1" required placeholder="100"></label>
+      <div class="dialog-actions field-wide"><button class="button-outline" type="button" data-close="event-dialog">Batal</button><button class="button-ink" id="save-event" type="submit">Simpan ke array →</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
